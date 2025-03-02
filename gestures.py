@@ -1,5 +1,16 @@
 #!/usr/bin/env python 
 
+"""
+First launch gesture controller contains directional controls (Up, Down, Left, Right)
+As well as confimation controllers of `Stop` and `Okay`
+
+To be launched using mode_manager.py or data_colelction.py
+
+----- EDITS --------
+To add gestures define Class and landmarks
+"""
+
+
 import math
 
 class Gesture:
