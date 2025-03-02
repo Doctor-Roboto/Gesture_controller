@@ -1,5 +1,12 @@
 #!/usr/bin/env python 
 
+"""
+This is specifically design to work with Franka PR3 and current lab set up
+Designed as an example of simple gestural commands to motion parameters
+
+"""
+
+
 import numpy as np
 import panda_py
 from panda_py import controllers
