@@ -1,0 +1,11 @@
+# Underwater Robot Gesture Control Package requirements
+
+# Numerical computing and array handling
+numpy>=1.24.4
+
+# Hand tracking and computer vision
+mediapipe>=0.10.18
+opencv-python>=4.10.0.84
+
+# Plotting and visualization (including 3D plotting)
+matplotlib>=3.7.2
