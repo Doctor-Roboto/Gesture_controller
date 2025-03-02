@@ -1,4 +1,4 @@
-# Underwater Robot Gesture & Trajectory Control Package
+# Robot Gesture & Trajectory Control
 
 ## Overview
 
@@ -6,7 +6,29 @@ This package provides a modular framework for controlling an underwater robot us
 
 ## Getting started
 
-- **If Using Franka PR3**
+- **Set up environment(skip if using Franka PR3)**
+  - Create and activate virtual environment.
+```bash
+python3 -m venv .venv
+```
+```bash
+source .venv/bin/activate
+```
+- Install the package 
+```bash
+pip install <package>
+```
+- **Launch gesture controller using terminal**
+    - Choose between standard controller `mode_manager.py` or recording controller `data_collection.py` and launch. 
+```bash
+python mode_manager.py
+```
+```bash
+python data_collection.py
+```
+
+  
+## **If Using Franka PR3**
   - Launching basic controller with mode switcher
   - Currently <robot_host_name> is 192.168.1.11
 ```bash
