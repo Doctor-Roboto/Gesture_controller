@@ -1,5 +1,8 @@
 # Underwater Robot Gesture Control Package requirements
 
+# Python version
+python>=3.11.5
+
 # Numerical computing and array handling
 numpy>=1.24.4
 
