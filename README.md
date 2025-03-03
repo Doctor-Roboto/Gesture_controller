@@ -21,16 +21,20 @@ pip install <package>
 - **Launch gesture controller using terminal**
     - Choose between standard controller `mode_manager.py` or recording controller `data_collection.py` and launch. 
 ```bash
-python mode_manager.py
+python3 mode_manager.py
 ```
 ```bash
-python data_collection.py
+python3 data_collection.py
 ```
 
   
-## **If Using Franka PR3**
-  - Launching basic controller with mode switcher
-  - Currently <robot_host_name> is 192.168.1.11
+## If Using Franka PR3
+- **Ensure you have navigated to the proper directory and install**
+```bash
+pip install <package>
+```
+- Launching basic controller with mode switcher
+  - Currently `<robot_host_name>` is `192.168.1.11`
 ```bash
 python3 mode_manager.py <robot_host_name>
 ```
@@ -87,7 +91,7 @@ The package relies on the following key dependencies:
 - **mediapipe**
 - **opencv-python**
 - **matplotlib**
-- **panda_py** (for robot control)
+- **panda_py** (controller for Franka PR3)
 
 Install all dependencies using the provided `requirements.txt`:
 
