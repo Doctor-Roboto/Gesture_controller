@@ -19,9 +19,9 @@ To launch <python3 mode_manager.py 192.168.1.11>
 import cv2
 import mediapipe as mp
 import math
-from gestures import GestureRecognizer, OkayGesture, StopGesture
-from trajectory import TrajectoryMode
-from trajectory_3D import Trajectory3DMode
+from Gesture_controller.Gesture.gestures import GestureRecognizer, OkayGesture, StopGesture
+from Gesture_controller.Gesture.trajectory import TrajectoryMode
+from Gesture_controller.Gesture.trajectory_3D import Trajectory3DMode
 
 def detect_number_gesture(hand_landmarks, number):
     """

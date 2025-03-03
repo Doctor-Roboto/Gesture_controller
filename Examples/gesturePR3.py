@@ -18,7 +18,7 @@ import cv2
 import mediapipe as mp
 
 # Modules in this package
-from gestures import GestureRecognizer, StopGesture, OkayGesture
+from Gesture_controller.Gesture.gestures import GestureRecognizer, StopGesture, OkayGesture
 
 class RobotController:
     def __init__(self):

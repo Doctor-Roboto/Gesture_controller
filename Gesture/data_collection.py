@@ -26,9 +26,9 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D 
 
 # Import my modules
-from gestures import GestureRecognizer, OkayGesture, StopGesture
-from trajectory import TrajectoryMode
-from trajectory_3D import Trajectory3DMode
+from Gesture_controller.Gesture.gestures import GestureRecognizer, OkayGesture, StopGesture
+from Gesture_controller.Gesture.trajectory import TrajectoryMode
+from Gesture_controller.Gesture.trajectory_3D import Trajectory3DMode
 
 # Set this flag to False to disable data collection/plotting
 DATA_COLLECTION = True
