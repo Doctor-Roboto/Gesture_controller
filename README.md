@@ -25,10 +25,10 @@ pip install git+https://github.com/Doctor-Roboto/Gesture_controller.git
 - **Launch gesture controller using terminal**
     - Choose between standard controller `mode_manager.py` or recording controller `data_collection.py` and launch. 
 ```bash
-python3 gesture/mode_manager.py
+python3 -m gesture.mode_manager
 ```
 ```bash
-python3 gesture/data_collection.py
+python3 -m gesture.data_collection
 ```
 
   
@@ -40,11 +40,11 @@ pip install git+https://github.com/Doctor-Roboto/Gesture_controller.git
 - Launching basic controller with mode switcher
   - Currently `<robot_host_name>` is `192.168.1.11`
 ```bash
-python3 gesture/mode_manager.py <robot_host_name>
+python3 -m gesture.mode_manager <robot_host_name>
 ```
   - Initialisation of basic gestures for designated TAMP algorithm.
 ```bash
-python3 Examples/gesturePR3.py <robot_host_name>
+python3 examples.gesturePR3 <robot_host_name>
 ```
 
 ## Features
@@ -61,7 +61,7 @@ python3 Examples/gesturePR3.py <robot_host_name>
   - Switch between gesture mode and trajectory mode using simple number gestures:
     - **2** (index and middle fingers extended) to select gesture mode.
     - **3** (index, middle, and ring fingers extended) to select trajectory mode.
-  - Within trajectory mode, toggle between 2D and 3D sub-modes using the same gesture.
+  - Toggle between 2D and 3D sub-modes within trajectory mode using the same gesture.
   - Confirmation of mode switches is achieved via the **okay** (confirm) and **stop** (cancel) gestures.
 
 - **Data Collection (Optional)**
