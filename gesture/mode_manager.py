@@ -4,12 +4,12 @@
 Designed for integration of gestural controller for Franka PR3
 Will initially launch with gesture mode for basic controls
 
------- Instuctions on switcher -----
-Numers are in refence to holding up fingers 2 is two fingers and 3 is three
+------ Instructions on switcher -----
+Numbers are in reference to holding up fingers 2 is two fingers and 3 is three
 
-Using the gesture 2 will swith to gesture mode "okay" to confirm "stop" to deny
-Using the gesture 3 will swith to gesture mode "okay" to confirm "stop" to deny
-While in trajectory mode can swithc between  2D and 3D controls using 3
+Using gesture 2 will switch to gesture mode "okay" to confirm "stop" to deny
+Using gesture 3 will switch to gesture mode "okay" to confirm "stop" to deny
+While in trajectory mode can switch between  2D and 3D controls using 3
 
 
 To launch <python3 mode_manager.py 192.168.1.11>
@@ -19,9 +19,9 @@ To launch <python3 mode_manager.py 192.168.1.11>
 import cv2
 import mediapipe as mp
 import math
-from Gesture_controller.Gesture.gestures import GestureRecognizer, OkayGesture, StopGesture
-from Gesture_controller.Gesture.trajectory import TrajectoryMode
-from Gesture_controller.Gesture.trajectory_3D import Trajectory3DMode
+from gesture.gestures import GestureRecognizer, OkayGesture, StopGesture
+from gesture.trajectory import TrajectoryMode
+from gesture.trajectory_3D import Trajectory3DMode
 
 def detect_number_gesture(hand_landmarks, number):
     """
