@@ -2,7 +2,11 @@
 
 ## Overview
 
-This package provides a modular framework for controlling an underwater robot using hand gestures. It integrates gesture recognition and trajectory planning (both 2D and 3D) using MediaPipe and OpenCV. The system supports multiple modes with real-time switching and includes an optional data collection mode for analysis.
+This package provides a modular framework for controlling a robot using hand gestures. It integrates gesture recognition and trajectory planning (both 2D and 3D) using MediaPipe and OpenCV. The system supports multiple modes with real-time switching and includes an optional data collection mode for analysis. The program reads the relative positions of fingers in relation to the palm and other fingers using OpenCV integrated through mediapipe to determine the gesture being displayed. Trajectory points are generated from a centroid in relation to the detection of knuckle and wrist positions.
+
+## Hardware requirements
+
+- Webcam (Recommended minimum 720p 30fps) and good lighting conditions.
 
 ## Getting started
 
