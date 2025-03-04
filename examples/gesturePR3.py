@@ -1,7 +1,7 @@
 #!/usr/bin/env python 
 
 """
-This is specifically design to work with Franka PR3 and current lab set up
+This is specifically designed to work with Franka PR3 and current lab set up
 Designed as an example of simple gestural commands to motion parameters
 
 """
