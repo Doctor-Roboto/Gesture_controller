@@ -23,4 +23,11 @@ setup(
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
     ],
+    entry_points={
+    "console_scripts": [
+         "gesture-controller=gesture.mode_manager:main",
+         "gesture-collector=gesture.data_collection:main",
+    ]
+},
+
 )
