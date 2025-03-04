@@ -3,16 +3,16 @@
 """
 This is a similar launcher to the mode_manager.py script 
  - To launch: <python3 data_collection.py 192.168.1.11>
-In this instance data is recorded and stored as a list and plotted
+In this instance, data is recorded and stored as a list and plotted
 
------- Instuctions on switcher -----
-Numers are in refence to holding up fingers 2 is two fingers and 3 is three
+------ Instructions on switcher -----
+Numbers are in reference to holding up fingers: 2 is two fingers and 3 is three
 
-Using the gesture 2 will swith to gesture mode "okay" to confirm "stop" to deny
-Using the gesture 3 will swith to gesture mode "okay" to confirm "stop" to deny
-While in trajectory mode can swithc between  2D and 3D controls using 3
+Using gesture 2 will switch to gesture mode "okay" to confirm "stop" to deny
+Using gesture 3 will switch to gesture mode "okay" to confirm "stop" to deny
+While in trajectory mode can switch between  2D and 3D controls using 3
 
-At end of session ESC closes video window and data will be displayed
+At the end of the session, ESC closes the  video window, and data will be displayed
 **** Must save as windows appear or data will be lost ****
 
 """
@@ -26,9 +26,9 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D 
 
 # Import my modules
-from Gesture_controller.Gesture.gestures import GestureRecognizer, OkayGesture, StopGesture
-from Gesture_controller.Gesture.trajectory import TrajectoryMode
-from Gesture_controller.Gesture.trajectory_3D import Trajectory3DMode
+from gesture.gestures import GestureRecognizer, OkayGesture, StopGesture
+from gesture.trajectory import TrajectoryMode
+from gesture.trajectory_3D import Trajectory3DMode
 
 # Set this flag to False to disable data collection/plotting
 DATA_COLLECTION = True
@@ -80,10 +80,9 @@ def main():
     confirmation_okay = OkayGesture()
     confirmation_stop = StopGesture()
 
-    # Mode variables.
+    # Mode variables
     # current_mode can be "gesture" or "trajectory".
     current_mode = "gesture"
-    # When in trajectory mode, trajectory_submode can be "2d" or "3d".
     trajectory_submode = "2d"
     mode_switch_candidate = None
     mode_switch_counter = 0
@@ -234,7 +233,7 @@ def main():
 
             cv2.imshow("Mode Manager", frame)
             if cv2.waitKey(5) & 0xFF == 27:
-                # Before quitting, if we're in trajectory mode, record any active session.
+                # Before quitting, record any active session
                 if current_mode == "trajectory":
                     if trajectory_submode == "2d" and len(trajectory_mode_obj.trajectory_points) > 0:
                         collected_2d.append(list(trajectory_mode_obj.trajectory_points))
@@ -249,7 +248,7 @@ def main():
 
     # --- Data Collection: Plotting & Summary ---
     if DATA_COLLECTION:
-        # Plot each 2D trajectory in its own figure.
+        # Plot each 2D trajectory in its own figure
         for i, traj in enumerate(collected_2d):
             if len(traj) < 2:
                 continue
@@ -263,7 +262,7 @@ def main():
             plt.gca().invert_yaxis()  
             plt.grid(True)
         
-        # Plot each 3D trajectory in its own figure.
+        # Plot each 3D trajectory in its own figure
         for i, traj in enumerate(collected_3d):
             if len(traj) < 2:
                 continue
@@ -279,9 +278,9 @@ def main():
             ax.set_zlabel("Z (scaled)")
             plt.grid(True)
         
-        # Plot gesture summary.
+        # Plot gesture summary
         if collected_gestures:
-            times = [t - collected_gestures[0][0] for (t, _, _) in collected_gestures]  # relative time
+            times = [t - collected_gestures[0][0] for (t, _, _) in collected_gestures]
             gesture_vals = [cmd for (_, _, cmd) in collected_gestures]
             gesture_names = [name for (_, name, _) in collected_gestures]
             plt.figure()
