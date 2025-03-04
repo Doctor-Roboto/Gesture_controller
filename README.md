@@ -16,31 +16,31 @@ source .venv/bin/activate
 ```
 - Install the package 
 ```bash
-pip install <package>
+pip install git+https://github.com/Doctor-Roboto/Gesture_controller.git
 ```
 - **Launch gesture controller using terminal**
     - Choose between standard controller `mode_manager.py` or recording controller `data_collection.py` and launch. 
 ```bash
-python3 mode_manager.py
+python3 gesture/mode_manager.py
 ```
 ```bash
-python3 data_collection.py
+python3 gesture/data_collection.py
 ```
 
   
 ## If Using Franka PR3
 - **Ensure you have navigated to the proper directory and install**
 ```bash
-pip install <package>
+pip install git+https://github.com/Doctor-Roboto/Gesture_controller.git
 ```
 - Launching basic controller with mode switcher
   - Currently `<robot_host_name>` is `192.168.1.11`
 ```bash
-python3 mode_manager.py <robot_host_name>
+python3 gesture/mode_manager.py <robot_host_name>
 ```
   - Initialisation of basic gestures for designated TAMP algorithm.
 ```bash
-python3 gesturePR3.py <robot_host_name>
+python3 Examples/gesturePR3.py <robot_host_name>
 ```
 
 ## Features
