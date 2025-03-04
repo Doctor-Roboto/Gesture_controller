@@ -33,10 +33,10 @@ from gesture.trajectory_3D import Trajectory3DMode
 # Set this flag to False to disable data collection/plotting
 DATA_COLLECTION = True
 
-# Global containers for collected data.
-collected_2d = []      # List of lists; each inner list is one 2D trajectory (list of (x,y) tuples)
-collected_3d = []      # List of lists; each inner list is one 3D trajectory (list of (x,y,z) tuples)
-collected_gestures = []  # List of tuples: (timestamp, gesture_name, command_value)
+# Global containers    
+collected_2d = []      
+collected_3d = []      
+collected_gestures = []  
 
 def detect_number_gesture(hand_landmarks, number):
     """
@@ -80,8 +80,9 @@ def main():
     confirmation_okay = OkayGesture()
     confirmation_stop = StopGesture()
 
-    # Mode variables
+    # Mode variables.
     # current_mode can be "gesture" or "trajectory".
+    # When in trajectory mode, trajectory_submode can be "2d" or "3d"
     current_mode = "gesture"
     trajectory_submode = "2d"
     mode_switch_candidate = None
@@ -106,11 +107,9 @@ def main():
             if not ret:
                 continue
 
-            # Flip and convert frame.
             frame = cv2.flip(frame, 1)
             frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             frame_rgb.flags.writeable = False
-
             results = hands.process(frame_rgb)
 
             frame_rgb.flags.writeable = True
@@ -129,14 +128,13 @@ def main():
                         elif detect_number_gesture(hand_landmarks, 3) and current_mode != "trajectory":
                             candidate_detected = "trajectory"
                     else:
-                        # In trajectory mode, allow toggling between 2D and 3D using "3",
-                        # and switching back to gesture mode with "2".
+                        # In trajectory mode, allow toggling 
                         if detect_number_gesture(hand_landmarks, 3):
                             candidate_detected = "toggle_trajectory"
                         elif detect_number_gesture(hand_landmarks, 2):
                             candidate_detected = "gesture"
 
-                    # Update candidate counters.
+                    # Update candidate counters
                     if candidate_detected:
                         if mode_switch_candidate == candidate_detected:
                             mode_switch_counter += 1
@@ -150,7 +148,7 @@ def main():
                     else:
                         mode_switch_counter = max(0, mode_switch_counter - 1)
 
-                    # Confirmation phase.
+                    # Confirmation 
                     if confirmation_required:
                         if confirmation_okay.detect(hand_landmarks):
                             confirmation_counter_okay += 1
@@ -162,7 +160,7 @@ def main():
                             confirmation_counter_stop = max(0, confirmation_counter_stop - 1)
 
                         if confirmation_counter_okay >= confirmation_threshold:
-                            # Before switching modes, record any active trajectory session.
+                            # Before switching modes, record any active session
                             if current_mode == "trajectory":
                                 if trajectory_submode == "2d" and len(trajectory_mode_obj.trajectory_points) > 0:
                                     collected_2d.append(list(trajectory_mode_obj.trajectory_points))
@@ -172,7 +170,7 @@ def main():
                                     trajectory3d_mode_obj.reset()
 
                             if mode_switch_candidate == "toggle_trajectory":
-                                # Toggling between 2D and 3D within trajectory mode.
+                                # Toggling between 2D and 3D within trajectory mode
                                 if trajectory_submode == "2d":
                                     trajectory_submode = "3d"
                                     print("Trajectory submode switched to 3D")
@@ -180,7 +178,7 @@ def main():
                                     trajectory_submode = "2d"
                                     print("Trajectory submode switched to 2D")
                             else:
-                                # Switching main modes.
+                                # Switching main modes
                                 current_mode = mode_switch_candidate
                                 print("Mode switched to:", current_mode)
                             mode_switch_candidate = None
@@ -197,7 +195,7 @@ def main():
                             confirmation_counter_okay = 0
                             confirmation_counter_stop = 0
 
-            # Record gesture commands in gesture mode.
+            # Record gesture commands
             if current_mode == "gesture" and results.multi_hand_landmarks:
                 for hand_landmarks in results.multi_hand_landmarks:
                     confirmed_gesture = gesture_recognizer.update(hand_landmarks)
@@ -206,11 +204,11 @@ def main():
                         cv2.putText(frame, f"{gesture_name} ({command_value})", (10, 120),
                                     cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
                         print(f"Gesture command: {gesture_name}, {command_value}")
-                        # Record with a timestamp.
+                        # Record a timestamp
                         if DATA_COLLECTION:
                             collected_gestures.append((time.time(), gesture_name, command_value))
 
-            # Mode-specific processing.
+            # Mode-specific processing
             if current_mode == "trajectory":
                 if results.multi_hand_landmarks:
                     hand_landmarks = results.multi_hand_landmarks[0]
@@ -221,7 +219,7 @@ def main():
                         trajectory3d_mode_obj.update(hand_landmarks, frame.shape)
                         trajectory3d_mode_obj.draw(frame)
 
-            # Display current mode info.
+            # Display current mode 
             cv2.putText(frame, f"Current Mode: {current_mode}", (10, 30),
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
             if current_mode == "trajectory":
@@ -248,7 +246,7 @@ def main():
 
     # --- Data Collection: Plotting & Summary ---
     if DATA_COLLECTION:
-        # Plot each 2D trajectory in its own figure
+        # Plot each 2D trajectory
         for i, traj in enumerate(collected_2d):
             if len(traj) < 2:
                 continue
@@ -262,7 +260,7 @@ def main():
             plt.gca().invert_yaxis()  
             plt.grid(True)
         
-        # Plot each 3D trajectory in its own figure
+        # Plot each 3D trajectory
         for i, traj in enumerate(collected_3d):
             if len(traj) < 2:
                 continue
@@ -278,20 +276,14 @@ def main():
             ax.set_zlabel("Z (scaled)")
             plt.grid(True)
         
-        # Plot gesture summary
+        # Print the gesture list with relative timestamps
         if collected_gestures:
-            times = [t - collected_gestures[0][0] for (t, _, _) in collected_gestures]
-            gesture_vals = [cmd for (_, _, cmd) in collected_gestures]
-            gesture_names = [name for (_, name, _) in collected_gestures]
-            plt.figure()
-            plt.scatter(times, gesture_vals, c='m')
-            for i, name in enumerate(gesture_names):
-                plt.annotate(name, (times[i], gesture_vals[i]))
-            plt.title("Gesture Summary")
-            plt.xlabel("Time (s)")
-            plt.ylabel("Command Value")
-            plt.grid(True)
-
+            print("\nGesture Summary (relative timestamps in seconds):")
+            start_time = collected_gestures[0][0]
+            for t, name, cmd in collected_gestures:
+                rel_time = t - start_time
+                print(f"{rel_time:.2f}s: {name} (Command: {cmd})")
+        
         plt.show()
 
 if __name__ == "__main__":
