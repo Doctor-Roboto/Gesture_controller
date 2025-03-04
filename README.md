@@ -91,7 +91,7 @@ The package relies on the following key dependencies:
 - **mediapipe**
 - **opencv-python**
 - **matplotlib**
-- **panda_py** (controller for Franka PR3)
+- (Optionally) **panda_py** Controller for Franka PR3
 
 Install all dependencies using the provided `requirements.txt`:
 
