@@ -78,7 +78,7 @@ class RobotController:
         with self.control_lock:
             self.curve_points = self.bezier_curve_approach(points)
         q0 = panda.get_orientation()
-        runtime = 20.0
+        runtime = 120.0
         panda.start_controller(ctrl)
         inc_counter = 0
 
