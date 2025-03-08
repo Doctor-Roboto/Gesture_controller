@@ -33,18 +33,21 @@ python3 -m gesture.data_collection
 
   
 ## If Using Franka PR3
-- **Ensure you have navigated to the proper directory and install**
+- **Ensure you have navigated to the proper directory and clone repo**
 ```bash
-pip install git+https://github.com/Doctor-Roboto/Gesture_controller.git
+cd ~/panda-py-main  
+```  
+```bash
+git clone https://github.com/Doctor-Roboto/Gesture_controller.git  
 ```
-- Launching basic controller with mode switcher
+- Launching basic controller with designated task location.
   - Currently `<robot_host_name>` is `192.168.1.11`
 ```bash
-python3 -m gesture.mode_manager <robot_host_name>
+python3 -m examples/corrective_gesture.py <robot_host_name>
 ```
-  - Initialisation of basic gestures for designated TAMP algorithm.
+  - Initialization TAMP algorithm for obstacle avoidance.
 ```bash
-python3 examples.gesturePR3 <robot_host_name>
+python3 examples/spatial_feedback.py <robot_host_name>
 ```
 
 ## Features
