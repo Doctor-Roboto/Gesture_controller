@@ -43,7 +43,7 @@ git clone https://github.com/Doctor-Roboto/Gesture_controller.git
 - Launching basic controller with designated task location.
   - Currently `<robot_host_name>` is `192.168.1.11`
 ```bash
-python3 -m examples/corrective_gesture.py <robot_host_name>
+python3 examples/corrective_gesture.py <robot_host_name>
 ```
   - Initialization TAMP algorithm for obstacle avoidance.
 ```bash
